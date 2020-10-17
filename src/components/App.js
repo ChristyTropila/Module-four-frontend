@@ -1,5 +1,7 @@
 import React from 'react';
-import NavbarContainer from './NavbarContainer'
+import Header from './Header'
+import LoginRegisterCont from './LoginRegisterCont'
+import MapContainer from './MapContainer'
 
 import '../App.css';
 
@@ -8,8 +10,9 @@ class App extends React.Component {
   return (
     <div className="App">
       <h1>Hello Welcome to My home page</h1>
-      <NavbarContainer/>
-      {/* <LoginContainer/> */}
+      <Header/>
+      <MapContainer/>
+      <LoginRegisterCont/>
 
     </div>
   );
