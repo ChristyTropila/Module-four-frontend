@@ -8,7 +8,7 @@ class Header extends React.Component{
     render(){
       
         return(
-            <div class="header">
+            <div className="header">
                 <h1>Hello from header!</h1>
                 <button onClick={this.handleButtonClick}>Restart game</button>
             </div>
