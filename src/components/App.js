@@ -8,7 +8,8 @@ class App extends React.Component {
   
   state={
     houses:[],
-    currentUser: ""
+    currentUser: "",
+    bucket: []
 }
 
 componentDidMount(){
@@ -28,16 +29,21 @@ componentDidMount(){
     })
   }
 
+  sendNetToGetBucket=(bucket)=>{
+   this.setState({
+     bucket: bucket
+   })
+  }
 
 
 
   render(){
-    console.log(this.state.currentUser)
+    console.log(this.state.bucket)
   return (
     <div className="App">
       <h1>Hello Welcome to My home page</h1>
       <Header/>
-      <MapContainer houses={this.state.houses} currentUser={this.state.currentUser}/>
+      <MapContainer sendNetToGetBucket={this.sendNetToGetBucket} houses={this.state.houses} currentUser={this.state.currentUser}/>
       <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
 
     </div>

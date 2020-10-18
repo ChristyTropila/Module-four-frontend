@@ -10,6 +10,7 @@ const MapContainer=(props)=>{
         key={house.id}
         listOfHouses={house}
         currentUser={props.currentUser}
+        sendNetToGetBucket={props.sendNetToGetBucket}
         />
     })
 

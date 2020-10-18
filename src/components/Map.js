@@ -55,7 +55,7 @@ return this.state.triviaQs[Math.floor(Math.random() * this.state.triviaQs.length
            console.log(this.state.showModal)
         return(
         <div className="container">
-          {this.state.showModal ? <Modal currentUser={this.props.currentUser} showModal={this.state.showModal} getTreatsMethod={this.sendDownNetForTreats} triviaQs={this.getRandomTrivia()}/>: null}
+          {this.state.showModal ? <Modal sendNetToGetBucket={this.props.sendNetToGetBucket} currentUser={this.props.currentUser} showModal={this.state.showModal} getTreatsMethod={this.sendDownNetForTreats} triviaQs={this.getRandomTrivia()}/>: null}
            <div className={this.state.showModal ? "houses-2" : "houses"} onClick={this.handleClickedHouse}>
          
               <h3>House: {this.props.listOfHouses.id}</h3>

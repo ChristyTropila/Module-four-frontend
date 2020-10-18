@@ -35,7 +35,7 @@ handleChange=(evt)=>{
      })
      .then(res => res.json())
      .then((buckets)=> {
-         console.log(buckets)
+         this.props.sendNetToGetBucket(buckets)
      })
  
 
