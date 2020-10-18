@@ -1,12 +1,28 @@
 .houses{
+  
     margin-top: 20px;
     border-style: solid;
     border-width: 4px;
     border-color: black;
-    width: 50%;
+    width: 70%;
+}
+
+.houses-2{
+    pointer-events:none;
+    margin-top: 20px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: black;
+    background: rgba(113, 110, 110, 0.75);
+    height: 100%;
+    transition: al 1.3s;
+    width: 100%;
+   
+
 }
 
 .house{
+  
     margin-top: 20px;
     border-style: solid;
     border-width: 2px;
@@ -18,7 +34,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  
+
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -28,6 +44,7 @@
   }
   
   .myoverlay {
+
     position: fixed;
     top: 0;
     left: 0;
@@ -37,8 +54,9 @@
   }
 
   .modal-wrapper{
+ 
       background: red;
-      width: 70%;
+      width: 100%;
       max-width: 800px;
       margin: 4rem auto;
       transition: all 0.5s ease;
@@ -46,6 +64,7 @@
   }
 
   .modal-header{
+ 
       background:green;
       color: white;
       padding: 1rem;
@@ -61,14 +80,8 @@
   }
 
   .modal-content{
+
       padding: 1.5rem 1rem;
   }
 
-  .modal-drop{
-      background: rgba(113, 110, 110, 0.75);
-      height: 100%;
-      position: fixed;
-      transition: al 1.3s;
-      width: 100%;
-  }
 

@@ -1,6 +1,12 @@
 import React from 'react'
+import LoginContainer from './LoginRegisterCont'
 import Modal from './Modal'
+
+
+
+
 class Map extends React.Component{
+    
 
     state={
         showModal: false,
@@ -9,6 +15,7 @@ class Map extends React.Component{
 
     //fetch the trivia questions and if haunted_house id matches target, add to state and change modal to true
     handleClickedHouse=(evt)=>{
+     evt.preventDefault()
       console.log(this.props.listOfHouses.id)
       fetch('http://localhost:4000/trivia')
       .then(res=> res.json())
@@ -30,25 +37,28 @@ class Map extends React.Component{
 
 getRandomTrivia=()=>{
 return this.state.triviaQs[Math.floor(Math.random() * this.state.triviaQs.length)]
-
   }
+
+  handleModalClick=(evt)=>{
+      evt.preventDefault()
+  }
+
+
+  
     render(){
            console.log(this.state.showModal)
 
+       
         return(
         <>
-        <div className="houses" onClick={this.handleClickedHouse}>
-        {this.state.showModal ? <div className="modal-drop"></div> : null}
-
-            {this.state.showModal ? <Modal className="modal-drop" showModal={this.state.showModal} triviaQs={this.getRandomTrivia()}/>  : null}
-          
+          {this.state.showModal ? <Modal showModal={this.state.showModal} triviaQs={this.getRandomTrivia()}/>: null}
+           <div className={this.state.showModal ? "houses-2" : "houses"} onClick={this.handleClickedHouse}>
+         
               <h3>House: {this.props.listOfHouses.id}</h3>
               <h4>{this.props.listOfHouses.lat}</h4>
               <h4>{this.props.listOfHouses.lng}</h4>
+              </div>
             
-               
-         
-            </div>
 
            </> 
         )
