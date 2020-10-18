@@ -29,17 +29,23 @@ class Map extends React.Component{
 
 
     render(){
+           console.log(this.state.showModal)
 
         return(
-            <div className="house" onClick={this.handleClickedHouse}>
+            
+            <div className="houses" onClick={this.handleClickedHouse}>
+            {this.state.showModal ? <div className="modal-drop"></div> : null}
+
+          
               <h3>House: {this.props.listOfHouses.id}</h3>
               <h4>{this.props.listOfHouses.lat}</h4>
               <h4>{this.props.listOfHouses.lng}</h4>
             
                
-              <Modal showModal={this.state.showModal} triviaQs={this.state.triviaQs}/>
+              <Modal  showModal={this.state.showModal} triviaQs={this.state.triviaQs}/>
          
             </div>
+            
         )
     }
 }
