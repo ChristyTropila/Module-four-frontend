@@ -25,27 +25,32 @@ class Map extends React.Component{
           }
     })
     })
+
 }
 
+getRandomTrivia=()=>{
+return this.state.triviaQs[Math.floor(Math.random() * this.state.triviaQs.length)]
 
+  }
     render(){
            console.log(this.state.showModal)
 
         return(
-            
-            <div className="houses" onClick={this.handleClickedHouse}>
-            {this.state.showModal ? <div className="modal-drop"></div> : null}
+        <>
+        <div className="houses" onClick={this.handleClickedHouse}>
+        {this.state.showModal ? <div className="modal-drop"></div> : null}
 
+            {this.state.showModal ? <Modal className="modal-drop" showModal={this.state.showModal} triviaQs={this.getRandomTrivia()}/>  : null}
           
               <h3>House: {this.props.listOfHouses.id}</h3>
               <h4>{this.props.listOfHouses.lat}</h4>
               <h4>{this.props.listOfHouses.lng}</h4>
             
                
-              <Modal  showModal={this.state.showModal} triviaQs={this.state.triviaQs}/>
          
             </div>
-            
+
+           </> 
         )
     }
 }
