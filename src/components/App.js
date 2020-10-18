@@ -7,7 +7,8 @@ import '../App.css';
 class App extends React.Component {
   
   state={
-    houses:[]
+    houses:[],
+    currentUser: ""
 }
 
 componentDidMount(){
@@ -21,13 +22,23 @@ componentDidMount(){
 }
 
 
+  sendNetToGetUser=(user)=>{
+    this.setState({
+      currentUser: user
+    })
+  }
+
+
+
+
   render(){
+    console.log(this.state.currentUser)
   return (
     <div className="App">
       <h1>Hello Welcome to My home page</h1>
       <Header/>
-      <MapContainer houses={this.state.houses}/>
-      <LoginRegisterCont/>
+      <MapContainer houses={this.state.houses} currentUser={this.state.currentUser}/>
+      <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
 
     </div>
   );
