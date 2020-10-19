@@ -4,7 +4,7 @@ import React from 'react'
 class Bucket extends React.Component{
 
  handleClick=(evt)=>{
-     console.log("clicked")
+     console.log(evt.target.value, "clicked")
  }
     render(){
      return(
@@ -14,10 +14,9 @@ class Bucket extends React.Component{
             {this.props.callback.map((item)=>{
                 return<div>
                 <li className="bucket-list" key={item.id}>{item.name}</li>
-                <button onClick={this.handleClick}>Delete</button>
+                <button value={item.id} onClick={this.handleClick}>Delete</button>
                 </div>
             })}
- 
       </div>
      )
     }
