@@ -1,4 +1,5 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 
 class LoginContainer extends React.Component{
 
@@ -32,8 +33,8 @@ handleSubmit=(evt)=>{
      .then(res=>res.json())
      .then((newUser)=> {
          this.props.sendNetToGetUser(newUser)
+  
      })
-
 
   }
 

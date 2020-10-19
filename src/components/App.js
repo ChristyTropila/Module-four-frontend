@@ -4,7 +4,8 @@ import LoginRegisterCont from './LoginRegisterCont'
 import MapContainer from './MapContainer'
 import Bucket from './Bucket'
 import '../App.css';
-import { isCompositeComponentWithType } from 'react-dom/test-utils';
+import {Route, Switch, Link} from 'react-router-dom'
+import Profile from './Profile'
 
 class App extends React.Component {
   
@@ -42,7 +43,6 @@ componentDidMount(){
   
   getListOfNames=()=>{
     let list=[]
-   
     this.state.bucket.map((item)=>{
       this.setState({
         names: []
@@ -54,7 +54,7 @@ componentDidMount(){
                     'Accept': 'application/json'
                    }
             })
-            .then(res=>res.text())
+            .then(res=>res.json())
             .then((names)=>{
               let copyOfState=[...this.state.names, names]
               this.setState({
@@ -64,28 +64,47 @@ componentDidMount(){
         })     
 })
 
-// list.push(innerList)
-// this.setState({
-//   names: list
-// })
 })
-
-
 
 }
 
 
 
   render(){
+    console.log(this.state.names)
 
-   
   return (
     <div className="App">
-      <h1>Hello Welcome to My home page</h1>
       <Header/>
-     {this.state.bucket.length!=0 ? <Bucket callback={this.state.names} /> : null }
+      <aside className="sidebar">
+        <ul>
+          <li>
+            <Link to="/profile" >View Profile</Link>
+          </li>
+          <li>
+          <Link to="/map">Map</Link>
+          </li>
+          <li>
+          <Link to="/bucket">Bucket</Link>
+          </li>
+        </ul> 
+      </aside>
+      <Route path="/bucket">
+     {this.state.bucket.length!=0 ? <Bucket callback={this.state.names} /> : null}
+     </Route>
+     {/* <Profile/> */}
+     <Switch>
+      <Route path="/profile">
+       <Profile currentUser={this.state.currentUser}/>
+      </Route>
+      <Route path="/map">
       <MapContainer getListOfNames={this.getListOfNames} sendNetToGetBucket={this.sendNetToGetBucket} houses={this.state.houses} currentUser={this.state.currentUser}/>
+      </Route>
+      <Route path="/login">
       <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
+      </Route>
+      {/* <Route component={NotFound}/> */}
+      </Switch>
 
     </div>
   );
