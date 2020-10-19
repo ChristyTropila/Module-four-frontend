@@ -1,12 +1,14 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
+ import {Redirect} from 'react-router-dom'
 
 class LoginContainer extends React.Component{
 
     state={
         name: "",
         userName: "",
-        password: ""
+        password: "",
+        userNameLogin: "",
+        passwordLogin: ""
     }
 
     
@@ -33,10 +35,16 @@ handleSubmit=(evt)=>{
      .then(res=>res.json())
      .then((newUser)=> {
          this.props.sendNetToGetUser(newUser)
-  
      })
 
   }
+
+  handleLoginSubmit=(evt)=>{
+
+  }
+
+
+
 
     render(){
 
@@ -52,6 +60,16 @@ handleSubmit=(evt)=>{
             Create Account
           </button>
         </form>
+        <form className="login-account"  onSubmit={this.handleLoginSubmit}>
+          <div className="inline fields">
+            <input type="text" name="userNameLogin" value={this.state.userNameLogin} onChange={this.handleInputChange} placeholder="User Name" />
+            <input type="text" name="passwordLogin"  value={this.state.passwordLogin} onChange={this.handleInputChange} placeholder="Password" />
+          </div>
+          <button className="button" type="submit">
+            Login
+          </button>
+        </form>
+
       </div>
         )
     }

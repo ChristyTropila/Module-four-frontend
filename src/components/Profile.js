@@ -1,5 +1,9 @@
 import React from 'react'
 
+import {Link,Route} from 'react-router-dom'
+import EditProfile from './EditProfile'
+
+
 class Profile extends React.Component{
 
     state={
@@ -14,17 +18,17 @@ class Profile extends React.Component{
        })
     }
 
+
   
+    
     render(){
 
        let {name, userName}=this.props.currentUser
-        console.log(this.props.currentUser)
         return(
             <div>
             <h1>Hello {name}</h1>
             <h2>Your current user name is: {userName}</h2>
-            <button onClick={this.handleClick}>Edit Info</button>
-           
+            <Link to="/editProfile">Edit Profile</Link>
             </div>
         )
     }

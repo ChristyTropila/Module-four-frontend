@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginContainer from './LoginRegisterCont'
+// import LoginContainer from './LoginRegisterCont'
 import Modal from './Modal'
 
 

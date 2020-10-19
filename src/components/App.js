@@ -6,6 +6,7 @@ import Bucket from './Bucket'
 import '../App.css';
 import {Route, Switch, Link} from 'react-router-dom'
 import Profile from './Profile'
+import EditProfile from './EditProfile'
 
 class App extends React.Component {
   
@@ -42,12 +43,12 @@ componentDidMount(){
 
   
   getListOfNames=()=>{
-    let list=[]
+
     this.state.bucket.map((item)=>{
       this.setState({
         names: []
       })
-      let innerList=[]
+    
         item.map((individual)=>{
             fetch(`http://localhost:4000/trick_treats/${individual.trick_treat_id}`, {
                 headers : { 
@@ -66,6 +67,12 @@ componentDidMount(){
 
 })
 
+}
+
+updateCurrentUser=(updatedUser)=>{
+ this.setState({
+   currentUser: updatedUser
+ })
 }
 
 
@@ -90,20 +97,24 @@ componentDidMount(){
         </ul> 
       </aside>
       <Route path="/bucket">
-     {this.state.bucket.length!=0 ? <Bucket callback={this.state.names} /> : null}
+     {this.state.bucket.length!==0 ? <Bucket callback={this.state.names} /> : null}
      </Route>
      {/* <Profile/> */}
      <Switch>
       <Route path="/profile">
        <Profile currentUser={this.state.currentUser}/>
       </Route>
+      <Route path="/editProfile">
+      <EditProfile currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/>
+      </Route>
+
       <Route path="/map">
       <MapContainer getListOfNames={this.getListOfNames} sendNetToGetBucket={this.sendNetToGetBucket} houses={this.state.houses} currentUser={this.state.currentUser}/>
       </Route>
       <Route path="/login">
       <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
       </Route>
-      {/* <Route component={NotFound}/> */}
+
       </Switch>
 
     </div>
