@@ -13,8 +13,10 @@ class App extends React.Component {
   state={
     houses:[],
     currentUser: "",
+    returningBucket: [],
     bucket: [],
-    names: []
+    names: [],
+    returningUserNames: []
 }
 
 componentDidMount(){
@@ -27,12 +29,7 @@ componentDidMount(){
     })
 }
 
-  sendUserToApp=(user)=>{
-    this.setState({
-      currentUser: user,
-     bucket: user.trick_treats
-    })
-  }
+
 
   sendNetToGetBucket=(bucket)=>{
     let copyOfBucket=[...this.state.bucket, bucket]
@@ -45,9 +42,12 @@ componentDidMount(){
       currentUser: user
     })
   }
-
-  getBucketReturningUser=()=>{
-    this.state.bucket.map((item)=>{
+  sendUserToApp=(user)=>{
+    this.setState({
+      currentUser: user,
+      returningBucket: user.trick_treats
+    })
+    this.state.returningBucket.map((item)=>{
       fetch(`http://localhost:4000/trick_treats/${item.id}`, {
         headers : { 
             'Accept': 'application/json'
@@ -55,21 +55,22 @@ componentDidMount(){
     })
     .then(res=>res.json())
     .then((names)=>{
-      let copyOfState=[...this.state.names, names]
+      let copyOfState=[...this.state.returningUserNames, names]
       this.setState({
-        names: copyOfState
+       returningUserNames: copyOfState
       })
 
     })
+
   })
   }
 
-  
-  getListOfNames=()=>{
+
+ getListOfNames=()=>{
     this.state.bucket.map((item)=>{
-      // this.setState({
-      //   names: []
-      // })
+      this.setState({
+        names: []
+      })
         item.map((individual)=>{
             fetch(`http://localhost:4000/trick_treats/${individual.trick_treat_id}`, {
                 headers : { 
@@ -97,14 +98,14 @@ updateCurrentUser=(updatedUser)=>{
 
   render(){
 
-    console.log(this.state.bucket)
+    console.log(this.state.returningBucket)
 
   return (
     <div className="App">
       <Header/>
 
      <Route path="/bucket">
-       {this.state.bucket.length!==0 ? <Bucket  getListOfNames={this.getBucketReturningUser} callback={this.state.names} /> : null}
+   <Bucket sendNames={this.state.names} callback={this.state.returningUserNames} /> 
      </Route>
 
      <Switch>
