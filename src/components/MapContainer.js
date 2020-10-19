@@ -11,6 +11,7 @@ const MapContainer=(props)=>{
         listOfHouses={house}
         currentUser={props.currentUser}
         sendNetToGetBucket={props.sendNetToGetBucket}
+        getListOfNames={props.getListOfNames} 
         />
     })
 

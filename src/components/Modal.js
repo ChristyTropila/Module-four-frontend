@@ -36,6 +36,7 @@ handleChange=(evt)=>{
      .then(res => res.json())
      .then((buckets)=> {
          this.props.sendNetToGetBucket(buckets)
+         this.props.getListOfNames()
      })
  
 
@@ -66,8 +67,7 @@ handleChange=(evt)=>{
    
 
   render(){
-      console.log(this.props)
-      
+
 
 let triviaInfo=this.props.triviaQs
 
