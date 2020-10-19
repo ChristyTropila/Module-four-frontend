@@ -101,7 +101,7 @@ updateCurrentUser=(updatedUser)=>{
      </Route>
      {/* <Profile/> */}
      <Switch>
-      <Route path="/profile">
+      <Route path="/profile" component={Profile}>
        <Profile currentUser={this.state.currentUser}/>
       </Route>
       <Route path="/editProfile">
@@ -111,7 +111,7 @@ updateCurrentUser=(updatedUser)=>{
       <Route path="/map">
       <MapContainer getListOfNames={this.getListOfNames} sendNetToGetBucket={this.sendNetToGetBucket} houses={this.state.houses} currentUser={this.state.currentUser}/>
       </Route>
-      <Route path="/login">
+      <Route path="/login" component={LoginRegisterCont}>
       <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
       </Route>
 

@@ -1,11 +1,12 @@
 import React from 'react'
-// import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 class EditProfile extends React.Component{
 
     state={
         name: "",
-        userName: ""
+        userName: "",
+        redirectToProfile: false
     }
 
     
@@ -31,6 +32,9 @@ handleSubmit=(evt)=>{
      .then(res=>res.json())
      .then((newUser)=> {
         this.props.updateCurrentUser(newUser)
+        this.setState({
+            redirectToProfile: true
+        })
   
      })
 
@@ -41,6 +45,11 @@ handleSubmit=(evt)=>{
 
  render(){
      
+    const redirectToProfile=this.state.redirectToProfile
+    if(redirectToProfile){
+        return <Redirect to="/profile"/>
+    }
+
    
    return(
     <div className="edit-account">

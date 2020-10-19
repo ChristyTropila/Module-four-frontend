@@ -8,8 +8,11 @@ class LoginContainer extends React.Component{
         userName: "",
         password: "",
         userNameLogin: "",
-        passwordLogin: ""
+        passwordLogin: "",
+        redirectToHome: false
     }
+
+
 
     
   //this sets the state to what the user types
@@ -35,6 +38,9 @@ handleSubmit=(evt)=>{
      .then(res=>res.json())
      .then((newUser)=> {
          this.props.sendNetToGetUser(newUser)
+       this.setState({
+           redirectToHome: true
+       })
      })
 
   }
@@ -47,6 +53,11 @@ handleSubmit=(evt)=>{
 
 
     render(){
+
+ const redirectToHome=this.state.redirectToHome
+        if(redirectToHome){
+            return <Redirect to="/"/>
+        }
 
  return(
     <div className="create-account">
