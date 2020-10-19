@@ -1,16 +1,15 @@
 import React from 'react'
 
-
 class Bucket extends React.Component{
 
  handleClick=(evt)=>{
      console.log(evt.target.value, "clicked")
  }
-    render(){
+
+render(){
      return(
       <div>
           <h1>hello inside</h1>
-
             {this.props.callback.map((item)=>{
                 return<div>
                 <li className="bucket-list" key={item.id}>{item.name}</li>

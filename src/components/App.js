@@ -4,7 +4,7 @@ import LoginRegisterCont from './LoginRegisterCont'
 import MapContainer from './MapContainer'
 import Bucket from './Bucket'
 import '../App.css';
-import {Route, Switch, Link} from 'react-router-dom'
+import {Route, Switch, Link, Redirect} from 'react-router-dom'
 import Profile from './Profile'
 import EditProfile from './EditProfile'
 
@@ -78,11 +78,26 @@ updateCurrentUser=(updatedUser)=>{
 
 
   render(){
-    console.log(this.state.names)
 
   return (
     <div className="App">
       <Header/>
+
+     <Route path="/bucket">
+       {this.state.bucket.length!==0 ? <Bucket callback={this.state.names} /> : null}
+     </Route>
+
+     <Switch>
+
+      <Route path="/profile" >
+       <Profile currentUser={this.state.currentUser}/>
+      </Route>
+
+      <Route path="/editProfile">
+      <EditProfile currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/>
+      </Route>
+
+      <Route path="/map">
       <aside className="sidebar">
         <ul>
           <li>
@@ -96,22 +111,10 @@ updateCurrentUser=(updatedUser)=>{
           </li>
         </ul> 
       </aside>
-      <Route path="/bucket">
-     {this.state.bucket.length!==0 ? <Bucket callback={this.state.names} /> : null}
-     </Route>
-     {/* <Profile/> */}
-     <Switch>
-      <Route path="/profile" component={Profile}>
-       <Profile currentUser={this.state.currentUser}/>
-      </Route>
-      <Route path="/editProfile">
-      <EditProfile currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/>
-      </Route>
-
-      <Route path="/map">
       <MapContainer getListOfNames={this.getListOfNames} sendNetToGetBucket={this.sendNetToGetBucket} houses={this.state.houses} currentUser={this.state.currentUser}/>
       </Route>
-      <Route path="/login" component={LoginRegisterCont}>
+
+      <Route path="/login" >
       <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
       </Route>
 

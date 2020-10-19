@@ -1,13 +1,13 @@
 
-
 import React from 'react'
 import '../App.css';
 
 class Modal extends React.Component{
     state={
-     selectedOption: 'option1'
-    
+     selectedOption: 'option1',
+     
     }
+ 
 
 handleChange=(evt)=>{
     this.setState({
@@ -37,6 +37,7 @@ handleChange=(evt)=>{
      .then((buckets)=> {
          this.props.sendNetToGetBucket(buckets)
          this.props.getListOfNames()
+         this.props.closeModal()
      })
  
 
@@ -57,7 +58,7 @@ handleChange=(evt)=>{
    returnAllTricks=()=>{
    let tricks=[]
        this.props.triviaQs.haunted_house.trick_treats.map((treat)=> {
-           if(treat.category===2){
+       if(treat.category===2){
           tricks.push(treat.id)
            }
         

@@ -1,9 +1,7 @@
 import React from 'react'
 // import LoginContainer from './LoginRegisterCont'
 import Modal from './Modal'
-
-
-
+import  {Redirect} from 'react-router-dom'
 
 class Map extends React.Component{
     
@@ -11,6 +9,12 @@ class Map extends React.Component{
     state={
         showModal: false,
         triviaQs: []
+    }
+
+    closeModal=()=>{
+        this.setState({
+            showModal:false
+        })
     }
 
     //fetch the trivia questions and if haunted_house id matches target, add to state and change modal to true
@@ -31,7 +35,7 @@ class Map extends React.Component{
             
           }
     })
-    })
+ })
 
 }
 
@@ -50,9 +54,14 @@ return this.state.triviaQs[Math.floor(Math.random() * this.state.triviaQs.length
 
   
     render(){
+
+        if(!this.props.currentUser){
+        return  <Redirect to="/login"/>
+        }
+    
         return(
         <div className="container">
-          {this.state.showModal ? <Modal  getListOfNames={this.props.getListOfNames}  sendNetToGetBucket={this.props.sendNetToGetBucket} currentUser={this.props.currentUser} showModal={this.state.showModal} getTreatsMethod={this.sendDownNetForTreats} triviaQs={this.getRandomTrivia()}/>: null}
+          {this.state.showModal ? <Modal closeModal={this.closeModal} getListOfNames={this.props.getListOfNames}  sendNetToGetBucket={this.props.sendNetToGetBucket} currentUser={this.props.currentUser} showModal={this.state.showModal} getTreatsMethod={this.sendDownNetForTreats} triviaQs={this.getRandomTrivia()}/>: null}
            <div className={this.state.showModal ? "houses-2" : "houses"} onClick={this.handleClickedHouse}>
          
               <h3>House: {this.props.listOfHouses.id}</h3>

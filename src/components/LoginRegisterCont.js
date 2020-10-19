@@ -12,9 +12,6 @@ class LoginContainer extends React.Component{
         redirectToHome: false
     }
 
-
-
-    
   //this sets the state to what the user types
 handleInputChange=(evt)=>{
     this.setState({
@@ -22,6 +19,7 @@ handleInputChange=(evt)=>{
     })
   }
 
+  //make fetch request to create new user, redirect to map
 handleSubmit=(evt)=>{
      evt.preventDefault()
      fetch('http://localhost:4000/users', {
@@ -50,13 +48,11 @@ handleSubmit=(evt)=>{
   }
 
 
-
-
     render(){
 
- const redirectToHome=this.state.redirectToHome
-        if(redirectToHome){
-            return <Redirect to="/"/>
+        //condition to check the state of the redirect prop
+        if(this.state.redirectToHome){
+            return <Redirect to="/map"/>
         }
 
  return(
