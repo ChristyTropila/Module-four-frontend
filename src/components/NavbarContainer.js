@@ -7,7 +7,7 @@ render(){
     return(
         <div className="navBar">
            <nav>
-               <a href="/login/">Login</a>
+               <a href="/">Login</a>
            </nav>
         </div>
     )

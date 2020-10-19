@@ -27,10 +27,10 @@ componentDidMount(){
     })
 }
 
-
-  sendNetToGetUser=(user)=>{
+  sendUserToApp=(user)=>{
     this.setState({
-      currentUser: user
+      currentUser: user,
+     bucket: user.trick_treats
     })
   }
 
@@ -40,15 +40,36 @@ componentDidMount(){
      bucket: copyOfBucket
    })
   }
+  sendNetToGetUser=(user)=>{
+    this.setState({
+      currentUser: user
+    })
+  }
+
+  getBucketReturningUser=()=>{
+    this.state.bucket.map((item)=>{
+      fetch(`http://localhost:4000/trick_treats/${item.id}`, {
+        headers : { 
+            'Accept': 'application/json'
+           }
+    })
+    .then(res=>res.json())
+    .then((names)=>{
+      let copyOfState=[...this.state.names, names]
+      this.setState({
+        names: copyOfState
+      })
+
+    })
+  })
+  }
 
   
   getListOfNames=()=>{
-
     this.state.bucket.map((item)=>{
-      this.setState({
-        names: []
-      })
-    
+      // this.setState({
+      //   names: []
+      // })
         item.map((individual)=>{
             fetch(`http://localhost:4000/trick_treats/${individual.trick_treat_id}`, {
                 headers : { 
@@ -61,12 +82,9 @@ componentDidMount(){
               this.setState({
                 names: copyOfState
               })
-        
-        })     
+        })      
 })
-
 })
-
 }
 
 updateCurrentUser=(updatedUser)=>{
@@ -79,12 +97,14 @@ updateCurrentUser=(updatedUser)=>{
 
   render(){
 
+    console.log(this.state.bucket)
+
   return (
     <div className="App">
       <Header/>
 
      <Route path="/bucket">
-       {this.state.bucket.length!==0 ? <Bucket callback={this.state.names} /> : null}
+       {this.state.bucket.length!==0 ? <Bucket  getListOfNames={this.getBucketReturningUser} callback={this.state.names} /> : null}
      </Route>
 
      <Switch>
@@ -115,7 +135,7 @@ updateCurrentUser=(updatedUser)=>{
       </Route>
 
       <Route path="/login" >
-      <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
+      <LoginRegisterCont sendUserToApp={this.sendUserToApp} sendNetToGetUser={this.sendNetToGetUser}/>
       </Route>
 
       </Switch>

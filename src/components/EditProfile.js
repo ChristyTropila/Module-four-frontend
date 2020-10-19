@@ -45,8 +45,8 @@ handleSubmit=(evt)=>{
 
  render(){
      
-    const redirectToProfile=this.state.redirectToProfile
-    if(redirectToProfile){
+  
+    if(this.state.redirectToProfile){
         return <Redirect to="/profile"/>
     }
 
