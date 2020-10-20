@@ -13,8 +13,10 @@ class App extends React.Component {
   state={
     houses:[],
     currentUser: "",
+    returningBucket: [],
     bucket: [],
-    names: []
+    names: [],
+    returningUserNames: []
 }
 
 componentDidMount(){
@@ -28,11 +30,6 @@ componentDidMount(){
 }
 
 
-  sendNetToGetUser=(user)=>{
-    this.setState({
-      currentUser: user
-    })
-  }
 
   sendNetToGetBucket=(bucket)=>{
     let copyOfBucket=[...this.state.bucket, bucket]
@@ -40,15 +37,40 @@ componentDidMount(){
      bucket: copyOfBucket
    })
   }
+  sendNetToGetUser=(user)=>{
+    this.setState({
+      currentUser: user
+    })
+  }
+  sendUserToApp=(user)=>{
+    this.setState({
+      currentUser: user,
+      returningBucket: user.trick_treats
+    })
+    this.state.returningBucket.map((item)=>{
+      fetch(`http://localhost:4000/trick_treats/${item.id}`, {
+        headers : { 
+            'Accept': 'application/json'
+           }
+    })
+    .then(res=>res.json())
+    .then((names)=>{
+      let copyOfState=[...this.state.returningUserNames, names]
+      this.setState({
+       returningUserNames: copyOfState
+      })
 
-  
-  getListOfNames=()=>{
+    })
 
+  })
+  }
+
+
+ getListOfNames=()=>{
     this.state.bucket.map((item)=>{
       this.setState({
         names: []
       })
-    
         item.map((individual)=>{
             fetch(`http://localhost:4000/trick_treats/${individual.trick_treat_id}`, {
                 headers : { 
@@ -61,12 +83,9 @@ componentDidMount(){
               this.setState({
                 names: copyOfState
               })
-        
-        })     
+        })      
 })
-
 })
-
 }
 
 updateCurrentUser=(updatedUser)=>{
@@ -79,12 +98,13 @@ updateCurrentUser=(updatedUser)=>{
 
   render(){
 
+    console.log(this.state.houses)
   return (
     <div className="App">
       <Header/>
 
      <Route path="/bucket">
-       {this.state.bucket.length!==0 ? <Bucket callback={this.state.names} /> : null}
+   <Bucket sendNames={this.state.names} callback={this.state.returningUserNames} /> 
      </Route>
 
      <Switch>
@@ -115,7 +135,7 @@ updateCurrentUser=(updatedUser)=>{
       </Route>
 
       <Route path="/login" >
-      <LoginRegisterCont sendNetToGetUser={this.sendNetToGetUser}/>
+      <LoginRegisterCont sendUserToApp={this.sendUserToApp} sendNetToGetUser={this.sendNetToGetUser}/>
       </Route>
 
       </Switch>

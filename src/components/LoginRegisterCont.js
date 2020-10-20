@@ -44,7 +44,17 @@ handleSubmit=(evt)=>{
   }
 
   handleLoginSubmit=(evt)=>{
-
+    evt.preventDefault()
+    fetch(`http://localhost:4000/users/${this.state.userNameLogin}`)
+  .then(res=>res.json())
+  .then((fetchedUser)=>{
+    console.log((fetchedUser))
+    this.props.sendUserToApp(fetchedUser)
+    this.setState({
+      redirectToHome: true
+    })
+  })
+ 
   }
 
 
