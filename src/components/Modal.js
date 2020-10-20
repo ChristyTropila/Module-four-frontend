@@ -80,7 +80,7 @@ const {selectedOption}=this.state
         opacity: this.props.showModal ? '1' : '0'
     }}
     >
-        <form onSubmit={this.handleSubmit}>
+        <form className="modal-form"onSubmit={this.handleSubmit}>
           <div className="radio"  >
               <h4>{triviaInfo.question}</h4>
               <h3>CurrentValue is: {selectedOption}</h3>

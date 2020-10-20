@@ -17,7 +17,6 @@ let icons=['https://snazzy-maps-cdn.azureedge.net/assets/marker-e83f4a4e-720c-46
           'https://snazzy-maps-cdn.azureedge.net/assets/marker-7fc0d75b-2b22-4e1f-8756-7b96f9b8db6c.png']
 
  let random=icons[Math.floor(Math.random() * icons.length)];   
- const API_KEY = `${process.env.REACT_APP_KEY}`
 
 class TheMap extends React.Component{
    
@@ -52,24 +51,8 @@ state={
         })
     }
 
-//  componentDidMount(){
-//      debugger
-//   this.updateState()
-// }
-
-//     updateState(){
-//     this.props.houses.forEach((house)=> {
-//          this.setState({
-//            houses:{
-//                lat: house.lat,
-//                lng: house.lng
-//            }
-//             })
-//     })
-// }
-    //fetch the trivia questions and if haunted_house id matches target, add to state and change modal to true
+//fetch the trivia questions and if haunted_house id matches target, add to state and change modal to true
     handleClickedHouse=(index)=>{
-
     
       fetch('http://localhost:4000/trivia')
       .then(res=> res.json())
@@ -108,7 +91,8 @@ return this.state.triviaQs[Math.floor(Math.random() * this.state.triviaQs.length
 
 
         return (
-            <div style={{
+        <div className={this.state.modal ? "houses-2" : "houses"} 
+        style={{
              position: "relative",
               width: "100%", 
               height: "1100px"
@@ -117,7 +101,7 @@ return this.state.triviaQs[Math.floor(Math.random() * this.state.triviaQs.length
             }} className="map"
           >
         {this.state.showModal ? <Modal closeModal={this.closeModal} getListOfNames={this.props.getListOfNames}  sendNetToGetBucket={this.props.sendNetToGetBucket} currentUser={this.props.currentUser} showModal={this.state.showModal} getTreatsMethod={this.sendDownNetForTreats} triviaQs={this.getRandomTrivia()}/>: null}
-        <div className={this.state.showModal ? "houses-2" : "houses"} onClick={this.handleClickedHouse}>
+        {/* <div className={this.state.showModal ? "houses-2" : "houses"} onClick={this.handleClickedHouse}> */}
             <Map
               google={this.props.google}
               zoom={13}
@@ -129,7 +113,7 @@ return this.state.triviaQs[Math.floor(Math.random() * this.state.triviaQs.length
               {this.displayMarkers()}
             </Map>
             </div>
-            </div>
+           
         );
       }
     }
