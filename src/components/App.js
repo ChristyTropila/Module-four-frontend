@@ -98,8 +98,7 @@ updateCurrentUser=(updatedUser)=>{
 
   render(){
 
-    console.log(this.state.returningBucket)
-
+    console.log(this.state.houses)
   return (
     <div className="App">
       <Header/>
