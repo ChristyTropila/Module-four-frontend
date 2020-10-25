@@ -20,52 +20,29 @@
 }
 
 
-.mymodal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid #ccc;
-    background: grey;
-    overflow: auto;
-    border-radius: 4px;
-    outline: none;
-    padding: 20px;
-  }
-  
-
 
   .modal-wrapper{
- 
+      font-size: 30px;
       background: red;
-      width: 100%;
-      max-width: 800px;
+      width: 50%;
+      height: 400px;
+      position: fixed;
+      top: 50%;
+      left: 5%;
+      transform: translate(-50%, -50%);
+      border: 5px solid #ccc;
+      overflow: auto;
+      border-radius: 10px;
+      outline: none;
+      padding: 20px;
       margin: 4rem auto;
       transition: all 0.5s ease;
-
+      z-index:10;
   }
 
-  .modal-header{
-      background: black;
-      background:green;
-      color: white;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-  }
-
-  .modal-header span{
-      font-size: 1.5rem;
-      cursor: pointer;
-  }
-
-  .modal-content{
-      padding: 1.5rem 1rem;
-  }
 
   
 .bucket-list{
     list-style-type: none;
 }
+
